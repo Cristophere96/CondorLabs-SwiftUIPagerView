@@ -14,6 +14,8 @@
 		B203159A27EE6F3C00C35329 /* PagerExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B203159927EE6F3C00C35329 /* PagerExampleTests.swift */; };
 		B20315A427EE6F3C00C35329 /* PagerExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20315A327EE6F3C00C35329 /* PagerExampleUITests.swift */; };
 		B20315A627EE6F3C00C35329 /* PagerExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20315A527EE6F3C00C35329 /* PagerExampleUITestsLaunchTests.swift */; };
+		B20315B327EE778A00C35329 /* PagerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20315B227EE778A00C35329 /* PagerItem.swift */; };
+		B2A791EE27F65274005CA491 /* BasePagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A791ED27F65274005CA491 /* BasePagerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		B203159F27EE6F3C00C35329 /* PagerExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PagerExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B20315A327EE6F3C00C35329 /* PagerExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerExampleUITests.swift; sourceTree = "<group>"; };
 		B20315A527EE6F3C00C35329 /* PagerExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B20315B227EE778A00C35329 /* PagerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerItem.swift; sourceTree = "<group>"; };
+		B2A791ED27F65274005CA491 /* BasePagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePagerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				B203158A27EE6F3A00C35329 /* ContentView.swift */,
 				B203158C27EE6F3C00C35329 /* Assets.xcassets */,
 				B203158E27EE6F3C00C35329 /* Preview Content */,
+				B20315B227EE778A00C35329 /* PagerItem.swift */,
+				B2A791ED27F65274005CA491 /* BasePagerView.swift */,
 			);
 			path = PagerExample;
 			sourceTree = "<group>";
@@ -257,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B20315B327EE778A00C35329 /* PagerItem.swift in Sources */,
 				B203158B27EE6F3A00C35329 /* ContentView.swift in Sources */,
 				B203158927EE6F3A00C35329 /* PagerExampleApp.swift in Sources */,
+				B2A791EE27F65274005CA491 /* BasePagerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +433,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -434,7 +443,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -454,6 +463,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,7 +473,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
