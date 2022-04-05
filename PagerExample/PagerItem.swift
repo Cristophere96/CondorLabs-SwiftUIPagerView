@@ -11,10 +11,7 @@ struct PagerItem<Content: View>: View {
     var content: () -> Content
     
     var body: some View {
-        ZStack {
-            Color("backgroundColor")
-                .edgesIgnoringSafeArea(.all)
-            
+        ZStack {            
             VStack {
                 VStack {
                     GeometryReader { proxy in
@@ -32,6 +29,7 @@ struct PagerItem<Content: View>: View {
                 .shadow(color: .gray, radius: 2, x: 0, y: 2)
             }
             .padding()
+            .padding(.bottom, 5)
         }
     }
 }

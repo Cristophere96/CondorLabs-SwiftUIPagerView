@@ -27,23 +27,34 @@ struct BasePagerView<Content, ViewModel>: View where Content: View, ViewModel: B
     
     var body: some View {
         GeometryReader { proxy in
-            HStack(spacing: 0) {
-                self.content.frame(width: proxy.size.width)
-            }
-            .frame(width: proxy.size.width, alignment: .leading)
-            .offset(x: -CGFloat(self.currentIndex) * proxy.size.width)
-            .offset(x: self.translation)
-            .animation(.interactiveSpring(), value: currentIndex)
-            .animation(.interactiveSpring(), value: translation)
-            .gesture(
-                DragGesture().updating(self.$translation) { value, state, _ in
-                    state = value.translation.width
-                }.onEnded { value in
-                    let randomBool = Bool.random()
-                    print(randomBool)
-                    self.viewModel.movePage(false, gestureValue: value, proxyWidth: proxy.size.width)
+            ZStack(alignment: .bottom) {
+                Color("backgroundColor")
+                    .edgesIgnoringSafeArea(.all)
+                
+                HStack(spacing: 0) {
+                    self.content.frame(width: proxy.size.width)
                 }
-            )
+                .frame(width: proxy.size.width, alignment: .leading)
+                .offset(x: -CGFloat(self.currentIndex) * proxy.size.width)
+                .offset(x: self.translation)
+                .animation(.interactiveSpring(), value: currentIndex)
+                .animation(.interactiveSpring(), value: translation)
+                .gesture(
+                    DragGesture().updating(self.$translation) { value, state, _ in
+                        state = value.translation.width
+                    }.onEnded { value in
+                        self.viewModel.movePage(true, gestureValue: value, proxyWidth: proxy.size.width)
+                    }
+                )
+                
+                HStack {
+                    ForEach(0..<pageCount, id: \.self) { index in
+                        Circle()
+                            .foregroundColor( index == currentIndex ? Color.blue : Color.gray )
+                            .frame(width: 10, height: 10)
+                    }
+                }
+            }
         }
     }
 }
