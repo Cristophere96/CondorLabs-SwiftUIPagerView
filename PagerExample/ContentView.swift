@@ -12,9 +12,8 @@ struct ContentView: View {
     
     var body: some View {
         BasePagerView(
-            pageCount: viewModel.pageCount,
-            currentIndex: $viewModel.currentIndex,
-            viewModel: viewModel) {
+            pageCount: viewModel.pagerState.pageCount,
+            currentIndex: $viewModel.pagerState.currentIndex) {
             PagerItem() {
                 VStack {
                     Text("View title #1")
@@ -77,10 +76,20 @@ struct ContentView: View {
                 }
             }
         }
+            .onGestureEnded { gestureValue, proxyWidth in
+                self.viewModel.movePage(true, gestureValue: gestureValue, proxyWidth: proxyWidth)
+            }
     }
 }
 
+final class BasePagerViewState: ObservableObject {
+    @Published var currentIndex: Int = 0
+    @Published var pageCount: Int = 3
+}
+
 protocol BasePagerViewType: ObservableObject {
+    var pagerState: BasePagerViewState { get set }
+    
     func movePage(_ goToNext: Bool,
                   gestureValue: GestureStateGesture<DragGesture, CGFloat>.Value,
                   proxyWidth: CGFloat)
@@ -93,10 +102,7 @@ protocol BasePagerViewType: ObservableObject {
                           proxyWidth: CGFloat)
 }
 
-final class ContentViewModel: BasePagerViewType {
-    @Published var currentIndex: Int = 0
-    @Published var pageCount: Int = 3
-    
+extension BasePagerViewType {
     func movePage(_ goToNext: Bool,
                   gestureValue: GestureStateGesture<DragGesture, CGFloat>.Value,
                   proxyWidth: CGFloat) {
@@ -112,17 +118,21 @@ final class ContentViewModel: BasePagerViewType {
                       proxyWidth: CGFloat) {
         if goToNext {
             let offset = gestureValue.translation.width / proxyWidth
-            let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
-            self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
+            let newIndex = (CGFloat(self.pagerState.currentIndex) - offset).rounded()
+            self.pagerState.currentIndex = min(max(Int(newIndex), 0), self.pagerState.pageCount - 1)
         }
     }
     
     func showPreviousPage(gestureValue: GestureStateGesture<DragGesture, CGFloat>.Value,
                           proxyWidth: CGFloat) {
         let offset = gestureValue.translation.width / proxyWidth
-        let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
-        self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
+        let newIndex = (CGFloat(self.pagerState.currentIndex) - offset).rounded()
+        self.pagerState.currentIndex = min(max(Int(newIndex), 0), self.pagerState.pageCount - 1)
     }
+}
+
+final class ContentViewModel: BasePagerViewType {
+    var pagerState: BasePagerViewState = .init()
 }
 
 struct ContentView_Previews: PreviewProvider {
